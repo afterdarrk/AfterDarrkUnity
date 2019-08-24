@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
+	private static Enemy selectedEnemy;
+
 	private SpriteOutline spriteOutline;
 
 	// Use this for initialization
 	void Start () {
 		spriteOutline = GetComponent<SpriteOutline> ();
+		spriteOutline.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -19,7 +22,16 @@ public class Enemy : MonoBehaviour {
 			Collider2D coll = GetComponent<Collider2D>();
 
 			if (coll.OverlapPoint (touchPos)) {
-				spriteOutline.enabled = !spriteOutline.enabled;
+				if (selectedEnemy != null) {
+					selectedEnemy.spriteOutline.enabled = false;
+				}
+
+				if (selectedEnemy == this) {
+					selectedEnemy = null;
+				} else {
+					selectedEnemy = this;
+					spriteOutline.enabled = true;
+				}
 			}
 		}
 	}
