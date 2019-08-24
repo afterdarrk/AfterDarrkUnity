@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour {
-
     private int lastProbChance;
 
     [Range(0, 1)]
