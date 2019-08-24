@@ -3,25 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
-
 	private static Enemy selectedEnemy;
 
 	private SpriteOutline spriteOutline;
+	private Collider2D enemyCollider;
+
+	public float speed = 1.0f;
+	public GameObject target;
 
 	// Use this for initialization
 	void Start () {
 		spriteOutline = GetComponent<SpriteOutline> ();
+		enemyCollider = GetComponent<Collider2D> ();
+
 		spriteOutline.enabled = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		// Screen Touch
-		if (Input.GetMouseButtonDown(0)) {
-			Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			Collider2D coll = GetComponent<Collider2D>();
+		if (Input.GetMouseButtonDown (0)) {
+			Vector3 touchPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 
-			if (coll.OverlapPoint (touchPos)) {
+			if (enemyCollider.OverlapPoint (touchPos)) {
 				if (selectedEnemy != null) {
 					selectedEnemy.spriteOutline.enabled = false;
 				}
@@ -33,6 +37,11 @@ public class Enemy : MonoBehaviour {
 					spriteOutline.enabled = true;
 				}
 			}
+		}
+
+		if (target != null) {
+			float step = speed * Time.deltaTime;
+			transform.position = Vector3.MoveTowards (transform.position, target.transform.position, step);
 		}
 	}
 }
