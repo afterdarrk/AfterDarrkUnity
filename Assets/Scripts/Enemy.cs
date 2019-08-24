@@ -17,12 +17,16 @@ public class Enemy : MonoBehaviour {
 		enemyCollider = GetComponent<Collider2D> ();
 
 		spriteOutline.enabled = false;
-	}
+
+        Vector3 moveDirection = target.transform.position - transform.position;
+        float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		// Screen Touch
-		if (Input.GetMouseButtonDown (0)) {
+        // Screen Touch
+        if (Input.GetMouseButtonDown (0)) {
 			Vector3 touchPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 
 			if (enemyCollider.OverlapPoint (touchPos)) {
