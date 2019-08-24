@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  target: {fileID: 0}
+  target: {fileID: 1215658632751858, guid: 9660bbf7785104df78d6cebe73f13839, type: 2}
 --- !u!212 &212365837103162294
 SpriteRenderer:
   m_ObjectHideFlags: 1
