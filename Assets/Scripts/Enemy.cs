@@ -9,18 +9,19 @@ public class Enemy : MonoBehaviour {
 	private Collider2D enemyCollider;
 
 	public float speed = 1.0f;
-	public GameObject target;
+	private GameObject target;
 
 	// Use this for initialization
 	void Start () {
 		spriteOutline = GetComponent<SpriteOutline> ();
 		enemyCollider = GetComponent<Collider2D> ();
+        target = GameObject.Find ("Fireplace");
 
 		spriteOutline.enabled = false;
 
         Vector3 moveDirection = target.transform.position - transform.position;
-        float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        float angle = Mathf.Atan2 (moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
     }
 	
 	// Update is called once per frame
