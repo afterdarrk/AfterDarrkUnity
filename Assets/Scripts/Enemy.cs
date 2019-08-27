@@ -21,8 +21,17 @@ public class Enemy : MonoBehaviour {
 
         Vector3 moveDirection = target.transform.position - transform.position;
         float angle = Mathf.Atan2 (moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
+        
+        if (transform.position.x > 0)//if enemy is spawned on the right hand side
+        {
+            transform.rotation = Quaternion.Euler(180, 0, -angle);
+        }
+        else
+        {
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
     }
+        
 	
 	// Update is called once per frame
 	void Update () {
